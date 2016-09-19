@@ -35,6 +35,8 @@ endif
 set hidden
 set showcmd
 set hlsearch
+set lazyredraw
+set showmatch
 set ignorecase
 set smartcase
 set nostartofline
@@ -44,6 +46,9 @@ set softtabstop=4
 set expandtab
 set cc=80
 set cursorline
+
+" Setting number and relativenumber displays the absolute number in the
+" current line and the relative numbers above and below the current line.
 set number
 set relativenumber
 
