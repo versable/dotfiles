@@ -70,3 +70,19 @@ let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#tabline#left_sep = ' '
 let g:airline#extensions#tabline#left_alt_sep = '|'
 
+"define :Tidy command to run perltidy on visual selection || entire buffer"
+command -range=% -nargs=* Tidy <line1>,<line2>!perltidy -pbp -bl -sbl
+
+"run :Tidy on entire buffer and return cursor to (approximate) original position"
+fun DoTidy()
+    let l = line(".")
+    let c = col(".")
+    :Tidy
+    call cursor(l, c)
+endfun
+
+"shortcut for normal mode to run on entire buffer then return to current line"
+au Filetype perl nmap <F2> :call DoTidy()<CR>
+
+"shortcut for visual mode to run on the the current visual selection"
+au Filetype perl vmap <F2> :Tidy<CR>
