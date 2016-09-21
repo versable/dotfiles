@@ -23,7 +23,7 @@ sub yesNoPromp
     local $| = 1;
     print "$inquery $prompt ";
     chomp( my $answer = <STDIN> );
-    $answer = substr lc $answer, 0, 1 if $answer;
+    $answer = lc substr $answer, 0, 1 if $answer;
     return !$answer ? $defaultAnswer eq PROMPT_YES : $answer eq PROMPT_YES;
 }
 
