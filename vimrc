@@ -56,6 +56,10 @@ set relativenumber
 " CtrlP extensions
 let g:ctrlp_extensions = ['tag', 'buffertag']
 
+" Reverse tab order for SuperTab
+let g:SuperTabMappingForward = '<s-tab>'
+let g:SuperTabMappingBackward = '<tab>'
+
 " Show trailing whitespace, tabs, highlight trailing whitespace red
 set list listchars=tab:→\ ,trail:·
 highlight ExtraWhitespace ctermbg=red guibg=red
