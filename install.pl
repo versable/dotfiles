@@ -16,7 +16,10 @@ sub yesNoPromp
     my $inquery = shift;
     my $defaultAnswer = shift || PROMPT_NO;
 
-    my $prompt = $defaultAnswer eq PROMPT_NO ? '[y/N]' : '[Y/n]';
+    my $prompt
+        = $defaultAnswer eq PROMPT_NO
+        ? '[' . PROMPT_YES . '/' . uc PROMPT_NO . ']'
+        : '[' . uc PROMPT_YES . '/' . PROMPT_NO . ']';
     local $| = 1;
     print "$inquery $prompt ";
     chomp( my $answer = <STDIN> );
