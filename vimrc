@@ -27,9 +27,9 @@ Plug 'vim-perl/vim-perl', { 'for': 'perl', 'do': 'make clean carp dancer highlig
 call plug#end()
 
 " Loads the base16-shell theme
+set t_Co=256
+let base16colorspace=256
 if filereadable(expand("~/.vimrc_background"))
-  set t_Co=256
-  let base16colorspace=256
   source ~/.vimrc_background
 endif
 
