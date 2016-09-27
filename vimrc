@@ -10,20 +10,21 @@ let g:plug_threads = 1
 
 " Plugs
 call plug#begin('~/.vim/plugged')
+Plug 'chriskempson/base16-vim'
+Plug 'ctrlpvim/ctrlp.vim'
+Plug 'ervandew/supertab'
+Plug 'honza/vim-snippets'
+Plug 'jiangmiao/auto-pairs'
+Plug 'mhinz/vim-signify'
+Plug 'SirVer/ultisnips'
+Plug 'szw/vim-tags'
+Plug 'terryma/vim-multiple-cursors'
+Plug 'tpope/vim-fugitive'
+Plug 'tpope/vim-sensible'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
-Plug 'terryma/vim-multiple-cursors'
-Plug 'ctrlpvim/ctrlp.vim'
-Plug 'tpope/vim-sensible'
-Plug 'tpope/vim-fugitive'
-Plug 'chriskempson/base16-vim'
-Plug 'szw/vim-tags'
-Plug 'jiangmiao/auto-pairs'
-Plug 'SirVer/ultisnips'
-Plug 'honza/vim-snippets'
-Plug 'vim-scripts/AutoComplPop'
-Plug 'ervandew/supertab'
 Plug 'vim-perl/vim-perl', { 'for': 'perl', 'do': 'make clean carp dancer highlight-all-pragmas moose test-more try-tiny'  }
+Plug 'vim-scripts/AutoComplPop'
 call plug#end()
 
 " Loads the base16-shell theme
