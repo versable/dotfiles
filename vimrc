@@ -15,6 +15,7 @@ Plug 'ctrlpvim/ctrlp.vim'
 Plug 'ervandew/supertab'
 Plug 'honza/vim-snippets'
 Plug 'jiangmiao/auto-pairs'
+Plug 'majutsushi/tagbar'
 Plug 'mhinz/vim-signify'
 Plug 'SirVer/ultisnips'
 Plug 'szw/vim-tags'
@@ -25,6 +26,9 @@ Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'vim-perl/vim-perl', { 'for': 'perl', 'do': 'make clean carp dancer highlight-all-pragmas moose test-more try-tiny'  }
 Plug 'vim-scripts/AutoComplPop'
+Plug 'xolox/vim-easytags'
+Plug 'xolox/vim-misc'
+Plug 'xolox/vim-session'
 call plug#end()
 
 " Loads the base16-shell theme
@@ -80,17 +84,20 @@ let g:airline_left_sep = ''
 let g:airline_left_alt_sep = ''
 let g:airline_right_sep=''
 
-" load guard for the perltidy scripts
+" Map <F8> to the tagbar
+nmap <F8> :TagbarToggle<CR>
+
+" Load guard for the perltidy scripts
 if ( exists('g:perltidy_loaded') && g:perltidy_loaded )
     \ || v:version < 700 || &cp
     finish
 endif
 let g:perltidy_loaded = 1
 
-"define :Tidy command to run perltidy on visual selection || entire buffer"
+" Define :Tidy command to run perltidy on visual selection || entire buffer
 command -range=% -nargs=* Tidy <line1>,<line2>!perltidy -pbp -bl -sbl
 
-"run :Tidy on entire buffer and return cursor to (approximate) original position"
+" Run :Tidy on entire buffer and return cursor to original position
 fun DoTidy()
     let l = line(".")
     let c = col(".")
@@ -98,8 +105,8 @@ fun DoTidy()
     call cursor(l, c)
 endfun
 
-"shortcut for normal mode to run on entire buffer then return to current line"
+" Shortcut for normal mode to run on entire buffer then return to current line
 au Filetype perl nmap <F2> :call DoTidy()<CR>
 
-"shortcut for visual mode to run on the the current visual selection"
+" Shortcut for visual mode to run on the the current visual selection
 au Filetype perl vmap <F2> :Tidy<CR>
