@@ -60,6 +60,9 @@ let g:ctrlp_extensions = ['tag', 'buffertag']
 let g:SuperTabMappingForward = '<s-tab>'
 let g:SuperTabMappingBackward = '<tab>'
 
+" Enable perl for Syntastic
+let g:syntastic_enable_perl_checker = 1
+
 " Show trailing whitespace, tabs, highlight trailing whitespace red
 set list listchars=tab:→\ ,trail:·
 highlight ExtraWhitespace ctermbg=red guibg=red
@@ -75,6 +78,13 @@ let g:airline#extensions#tabline#enabled = 1
 let g:airline_left_sep = ''
 let g:airline_left_alt_sep = ''
 let g:airline_right_sep=''
+
+" load guard for the perltidy scripts
+if ( exists('g:perltidy_loaded') && g:perltidy_loaded )
+    \ || v:version < 700 || &cp
+    finish
+endif
+let g:perltidy_loaded = 1
 
 "define :Tidy command to run perltidy on visual selection || entire buffer"
 command -range=% -nargs=* Tidy <line1>,<line2>!perltidy -pbp -bl -sbl
