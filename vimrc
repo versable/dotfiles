@@ -32,6 +32,17 @@ Plug 'xolox/vim-misc'
 Plug 'xolox/vim-session'
 call plug#end()
 
+" Use a seperate directory for temp vim files
+if !empty(glob(".vim/backup/"))
+  set backupdir=~/.vim/backup//
+endif
+if !empty(glob(".vim/swap/"))
+  set directory=~/.vim/swap//
+endif
+if !empty(glob(".vim/undo/"))
+  set undodir=~/.vim/undo//
+endif
+
 " Loads the base16-shell theme
 set t_Co=256
 let base16colorspace=256
