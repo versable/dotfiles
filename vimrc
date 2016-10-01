@@ -84,6 +84,9 @@ let g:ctrlp_extensions = ['tag', 'buffertag']
 let g:SuperTabMappingForward = '<s-tab>'
 let g:SuperTabMappingBackward = '<tab>'
 
+" Disabe vim-session dialog
+:let g:session_autoload = 'no'
+
 " Recommended settings for syntastic
 set statusline+=%#warningmsg#
 set statusline+=%{SyntasticStatuslineFlag()}
