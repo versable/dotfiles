@@ -121,7 +121,7 @@ BASE16_SHELL=$HOME/.config/base16-shell/
 
 export EDITOR="vim"
 
-if [ -n "$TMUX"  ]; then
+if [ -n "$TMUX" ] || [ -n "$SSH" ]; then
     export TERM="screen-256color"
 else
     export TERM="xterm-256color"
