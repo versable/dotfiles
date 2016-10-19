@@ -31,6 +31,8 @@ Plug 'xolox/vim-misc'
 Plug 'xolox/vim-session'
 call plug#end()
 
+let g:session_autosave = 'no'
+
 " Use a seperate directory for temp vim files
 if !empty(glob(".vim/backup/"))
   set backupdir=~/.vim/backup//
