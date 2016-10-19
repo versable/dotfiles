@@ -120,12 +120,7 @@ BASE16_SHELL=$HOME/.config/base16-shell/
 [ -n "$PS1"  ] && [ -s $BASE16_SHELL/profile_helper.sh  ] && eval "$($BASE16_SHELL/profile_helper.sh)"
 
 export EDITOR="vim"
-
-if [ -n "$TMUX"  ]; then
-    export TERM="screen-256color"
-else
-    export TERM="xterm-256color"
-fi
+export TERM="screen-256color"
 
 # Colored man pages: http://linuxtidbits.wordpress.com/2009/03/23/less-colors-for-man-pages/
 # Less Colors for Man Pages
