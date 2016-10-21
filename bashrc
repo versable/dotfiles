@@ -96,7 +96,14 @@ alias ...='cd ../..'
 alias ....='cd ../../..'
 alias .....='cd ../../../..'
 
+# Use vim as super user with the users local .vimrc
 alias suvim='sudo -E vim'
+
+# Simple function to copy local bashrc to remote, resolves symlinks and is
+# similar to ssh-copy-id in usage.
+function ssh-copy-bashrc {
+    rsync -ahP --copy-links ~/.bashrc $1:
+}
 
 # Alias definitions.
 # You may want to put all your additions into a separate file like
