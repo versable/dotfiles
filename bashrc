@@ -102,6 +102,12 @@ function ssh-copy-bashrc {
     rsync -ahP --copy-links ~/.bashrc $1:
 }
 
+# Simple function for displaying svn in color and piping to less if the output
+# fills the screen. (needs colordiff)
+function svndiff {
+    svn diff $1 | colordiff | less -R -F -X
+}
+
 # Alias definitions.
 # You may want to put all your additions into a separate file like
 # ~/.bash_aliases, instead of adding them here directly.
