@@ -44,6 +44,8 @@ if !empty(glob(".vim/undo/"))
   set undodir=~/.vim/undo//
 endif
 
+set clipboard=unnamedplus
+
 " Loads the base16-shell theme
 set t_Co=256
 let base16colorspace=256
