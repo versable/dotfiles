@@ -115,6 +115,10 @@ let g:airline_right_sep=''
 " Map <F8> to the tagbar
 nmap <F8> :TagbarToggle<CR>
 
+" Bind Enter to insert newline without entering insert mode
+nmap <S-Enter> O<Esc>
+nmap <CR> o<Esc>
+
 " Use neocomplete.
 let g:neocomplete#enable_at_startup = 1
 " Use smartcase.
