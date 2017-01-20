@@ -21,7 +21,6 @@ Plug 'scrooloose/syntastic'
 Plug 'shougo/neocomplete.vim'
 Plug 'SirVer/ultisnips'
 Plug 'szw/vim-tags'
-Plug 'terryma/vim-multiple-cursors'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-sensible'
 Plug 'vim-airline/vim-airline'
@@ -45,6 +44,13 @@ if !empty(glob(".vim/undo/"))
 endif
 
 set clipboard=unnamedplus
+
+" Set leader key to comma
+:let mapleader = ","
+
+" Move between tabs
+nmap <leader>p :bprevious<CR>
+nmap <leader>n :bnext<CR>
 
 " Loads the base16-shell theme
 set t_Co=256
@@ -93,8 +99,13 @@ let g:syntastic_auto_loc_list = 0
 let g:syntastic_check_on_open = 1
 let g:syntastic_check_on_wq = 0
 
+" Enable javascript jshint
+let g:syntastic_javascript_checkers = ['jshint']
 " Enable perl for Syntastic
 let g:syntastic_enable_perl_checker = 1
+
+" Set spell for gitcommit
+autocmd FileType gitcommit setlocal spell
 
 " Show trailing whitespace, tabs, highlight trailing whitespace red
 set list listchars=tab:→\ ,trail:·
@@ -108,16 +119,13 @@ autocmd BufWinLeave * call clearmatches()
 " Airline themes and 'straight look' settings
 let g:airline_theme='base16_eighties'
 let g:airline#extensions#tabline#enabled = 1
+let g:airline#extensions#tabline#buffer_nr_show = 1
 let g:airline_left_sep = ''
 let g:airline_left_alt_sep = ''
 let g:airline_right_sep=''
 
 " Map <F8> to the tagbar
 nmap <F8> :TagbarToggle<CR>
-
-" Bind Enter to insert newline without entering insert mode
-nmap <S-Enter> O<Esc>
-nmap <CR> o<Esc>
 
 " Use neocomplete.
 let g:neocomplete#enable_at_startup = 1
@@ -165,6 +173,9 @@ inoremap <expr><CR> pumvisible()? "\<C-y>" : "\<CR>"
 let g:neocomplete#enable_auto_select = 1
 
 " Enable omni completion.
+filetype on
+filetype plugin on
+filetype indent on
 autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
 autocmd FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
 autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
@@ -188,7 +199,7 @@ endif
 let g:perltidy_loaded = 1
 
 " Define :Tidy command to run perltidy on visual selection || entire buffer
-command -range=% -nargs=* Tidy <line1>,<line2>!perltidy -pbp -bl -sbl
+command -range=% -nargs=* Tidy <line1>,<line2>!perltidy -pbp -bl -sbl -pt=2
 
 " Run :Tidy on entire buffer and return cursor to original position
 fun DoTidy()
