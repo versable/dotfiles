@@ -10,6 +10,7 @@ let g:plug_threads = 1
 
 " Plugs
 call plug#begin('~/.vim/plugged')
+Plug 'scrooloose/nerdtree'
 Plug 'chriskempson/base16-vim'
 Plug 'ctrlpvim/ctrlp.vim'
 Plug 'ervandew/supertab'
@@ -26,10 +27,10 @@ Plug 'tpope/vim-sensible'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'vim-perl/vim-perl', { 'for': 'perl', 'do': 'make clean carp dancer highlight-all-pragmas moose test-more try-tiny'  }
-Plug 'xolox/vim-misc'
-Plug 'xolox/vim-session'
+Plug 'leafgarland/typescript-vim'
 call plug#end()
 
+" Don't save the session
 let g:session_autosave = 'no'
 
 " Use a seperate directory for temp vim files
@@ -43,10 +44,14 @@ if !empty(glob(".vim/undo/"))
   set undodir=~/.vim/undo//
 endif
 
+" Set clipboard to X11 buffer
 set clipboard=unnamedplus
 
 " Set leader key to comma
 :let mapleader = ","
+
+" Clear highlight selection
+nnoremap <silent> <F3> :let @/ = ""<CR>
 
 " Move between tabs
 nmap <leader>p :bprevious<CR>
@@ -59,19 +64,30 @@ if filereadable(expand("~/.vimrc_background"))
   source ~/.vimrc_background
 endif
 
+" Hide closed buffers
 set hidden
+" Shows last command in the status bar
 set showcmd
+" Highlight all search matches
 set hlsearch
+" Don't redraw on macros, registers etc. Use :redraw for manual redraw
 set lazyredraw
+" Show matching brackets etc.
 set showmatch
+" Match case insensitive IF the search term is lowercase
 set ignorecase
 set smartcase
+" Autoindent
 set nostartofline
+" Asks if a file should be saved, rather then displaying an error
 set confirm
+" Tabstop values
 set shiftwidth=4
 set softtabstop=4
 set expandtab
+" 80 char marker
 set cc=80
+" Highlight the line the cursore is on
 set cursorline
 
 " Setting number and relativenumber displays the absolute number in the
@@ -88,6 +104,13 @@ let g:SuperTabMappingBackward = '<tab>'
 
 " Disabe vim-session dialog
 :let g:session_autoload = 'no'
+
+" Open NERDTree
+map <C-n> :NERDTreeToggle<CR>
+
+" NERDTree arrows
+let g:NERDTreeDirArrowExpandable = '▸'
+let g:NERDTreeDirArrowCollapsible = '▾'
 
 " Recommended settings for syntastic
 set statusline+=%#warningmsg#
