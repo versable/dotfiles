@@ -30,7 +30,7 @@ sub yesNoPrompt
     return !$answer ? $defaultAnswer eq PROMPT_YES : $answer eq PROMPT_YES;
 }
 
-my @fileConfigs = ( 'vimrc', 'bashrc', 'zshrc', 'tmux.conf' );
+my @fileConfigs = ( 'vimrc', 'bashrc', 'tmux.conf' );
 
 foreach my $conf (@fileConfigs)
 {
