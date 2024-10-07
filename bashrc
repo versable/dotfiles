@@ -8,10 +8,11 @@ case $- in
       *) return;;
 esac
 
-export HISTCONTROL=ignoredups:erasedups  # no duplicate entries
-export HISTSIZE=100000                   # big big history
-export HISTFILESIZE=100000               # big big history
-shopt -s histappend                      # append to history, don't overwrite it
+export HISTCONTROL=ignoreboth:ignoredups:erasedups  # no duplicate entries
+export HISTSIZE=100000                              # big big history
+export HISTFILESIZE=100000                          # big big history
+shopt -s histappend                                 # append to history, don't
+                                                    # overwrite it
 
 # Save and reload the history after each command finishes
 export PROMPT_COMMAND="history -a; history -c; history -r; $PROMPT_COMMAND"
@@ -93,20 +94,50 @@ alias ...='cd ../..'
 alias ....='cd ../../..'
 alias .....='cd ../../../..'
 
+# Set printer defaults
+alias lp="lp -o media=a4"
+
 # Use vim as super user with the users local .vimrc
-alias suvim='sudo -E nvim'
-alias vim='nvim'
+alias suvim='sudo -E vim'
+alias vim='vim'
+
+# Clipboard alias
+alias xclip='xclip -selection clipboard'
+
+# Sppedtest
+alias speedtest='wget -O /dev/null http://speedtest.belwue.net/10G --report-speed=bits'
+
+# Wireguard
+alias wgu='wg-quick up wg0'
+alias wgd='wg-quick down wg0'
+
+# Mutt/Neomutt
+alias mutt='neomutt'
+
+# Dual monitor setup
+alias dualmon="xrandr --auto --output DP-3-1 --primary --mode 2560x1440 --right-of eDP-1 && killall plank && plank&"
 
 # Simple function to copy local bashrc to remote, resolves symlinks and is
 # similar to ssh-copy-id in usage.
 function ssh-copy-bashrc {
-    rsync -ahP --copy-links ~/.bashrc $1:
+    rsync -ahP --copy-links ~/.bashrc "$1":
 }
 
-# Simple function for displaying svn in color and piping to less if the output
-# fills the screen. (needs colordiff)
-function svndiff {
-    svn diff $* | colordiff | less -F
+function wgs {
+    ip addr show dev wg0 2>/dev/null | awk \
+        '{
+            if ($1 == "inet") {
+                wgs = $2;
+            }
+        } END {
+            if (wgs) {
+                print "wg0 is up with " wgs;
+                exit 0
+            } else {
+                print "wg0 is down";
+                exit 1;
+            }
+        }'
 }
 
 # Alias definitions.
@@ -129,15 +160,18 @@ if ! shopt -oq posix; then
   fi
 fi
 
-BASE16_SHELL=$HOME/.config/base16-shell/
-[ -n "$PS1"  ] && [ -s $BASE16_SHELL/profile_helper.sh  ] && eval "$($BASE16_SHELL/profile_helper.sh)"
+# Base16 Shell
+BASE16_SHELL="$HOME/.config/base16-shell/"
+[ -n "$PS1" ] && \
+    [ -s "$BASE16_SHELL/profile_helper.sh" ] && \
+        source "$BASE16_SHELL/profile_helper.sh"
 
-export EDITOR="nvim"
-export VISUAL="nvim"
+export EDITOR="vim"
+export VISUAL="vim"
 export TERM="screen-256color"
 
-# tput color codes
-# foreground
+# Tput color codes
+# Foreground
 TPUT_FG_BLACK=`tput setaf 0`
 TPUT_FG_BLUE=`tput setaf 1`
 TPUT_FG_GREEN=`tput setaf 2`
@@ -147,7 +181,7 @@ TPUT_FG_MAGENTA=`tput setaf 5`
 TPUT_FG_YELLOW=`tput setaf 6`
 TPUT_FG_WHITE=`tput setaf 7`
 
-# background
+# Background
 TPUT_BG_BLACK=`tput setab 0`
 TPUT_BG_BLUE=`tput setab 1`
 TPUT_BG_GREEN=`tput setab 2`
@@ -157,21 +191,25 @@ TPUT_BG_MAGENTA=`tput setab 5`
 TPUT_BG_YELLOW=`tput setab 6`
 TPUT_BG_WHITE=`tput setab 7`
 
-# special
+# Special
 TPUT_BOLD=`tput bold`
 TPUT_BLINK=`tput blink`
 TPUT_INVERSE=`tput rev`
 TPUT_UNDERLINE=`tput smul`
 TPUT_RESET=`tput sgr0`
 
-# Less Colors for Man Pages
+# Less colors for man pages
 export LESS_TERMCAP_mb=$"$TPUT_BLINK"                 # begin blinking
 export LESS_TERMCAP_md=$"$TPUT_BOLD$TPUT_FG_RED"      # begin bold
 export LESS_TERMCAP_me=$"$TPUT_RESET"                 # end mode
+export LESS_TERMCAP_so=$"$TPUT_BG_CYAN$TPUT_FG_BLACK" # begin standout-mode
 export LESS_TERMCAP_se=$"$TPUT_RESET"                 # end standout-mode
-export LESS_TERMCAP_so=$"$TPUT_BG_CYAN$TPUT_FG_BLACK" # begin standout-mode - info box/search result
-export LESS_TERMCAP_ue=$"$TPUT_RESET"                 # end underline
 export LESS_TERMCAP_us=$"$TPUT_UNDERLINE$TPUT_RED"    # begin underline
+export LESS_TERMCAP_ue=$"$TPUT_RESET"                 # end underline
 
 # For perlomni
 export PATH=~/.vim/bin:$PATH
+export PATH=~/.cargo/bin:$PATH
+
+# Set user bin path
+export PATH="$PATH:/home/mlangfe/.local/bin"
