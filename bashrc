@@ -99,7 +99,9 @@ alias lp="lp -o media=a4"
 
 # Use vim as super user with the users local .vimrc
 alias suvim='sudo -E vim'
-alias vim='vim'
+
+# Rsync the way it was intended to be used
+alias rs='rsync --partial --inplace -acvhP'
 
 # Clipboard alias
 alias xclip='xclip -selection clipboard'
