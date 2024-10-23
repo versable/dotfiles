@@ -10,25 +10,34 @@ let g:plug_threads = 1
 
 " Plugs
 call plug#begin('~/.vim/plugged')
-Plug 'scrooloose/nerdtree'
+Plug 'dense-analysis/ale'
+Plug 'SirVer/ultisnips'
+Plug 'aklt/plantuml-syntax'
 Plug 'chriskempson/base16-vim'
 Plug 'ctrlpvim/ctrlp.vim'
+Plug 'editorconfig/editorconfig-vim'
 Plug 'ervandew/supertab'
+Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries'  }
+Plug 'gryf/pep8-vim'
 Plug 'honza/vim-snippets'
+Plug 'jceb/vim-orgmode'
 Plug 'jiangmiao/auto-pairs'
+Plug 'leafgarland/typescript-vim'
 Plug 'majutsushi/tagbar'
 Plug 'mhinz/vim-signify'
+Plug 'scrooloose/nerdtree'
 Plug 'scrooloose/syntastic'
 Plug 'shougo/neocomplete.vim'
-Plug 'SirVer/ultisnips'
 Plug 'szw/vim-tags'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-sensible'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'vim-perl/vim-perl', { 'for': 'perl', 'do': 'make clean carp dancer highlight-all-pragmas moose test-more try-tiny'  }
-Plug 'leafgarland/typescript-vim'
 call plug#end()
+
+set modeline
+let g:ale_cpp_clangd_options = "-stdlib=libc++ -std=c++17"
 
 " Don't save the session
 let g:session_autosave = 'no'
@@ -49,6 +58,7 @@ set clipboard=unnamedplus
 
 " Set leader key to comma
 :let mapleader = ","
+:let maplocalleader="\<space>"
 
 " Clear highlight selection
 nnoremap <silent> <F3> :let @/ = ""<CR>
@@ -60,10 +70,10 @@ nmap <leader>n :bnext<CR>
 " Loads the base16-shell theme
 set t_Co=256
 let base16colorspace=256
+colorscheme base16-default-dark
 if filereadable(expand("~/.vimrc_background"))
   source ~/.vimrc_background
 endif
-
 " Hide closed buffers
 set hidden
 " Shows last command in the status bar
@@ -237,3 +247,4 @@ au Filetype perl nmap <F2> :call DoTidy()<CR>
 
 " Shortcut for visual mode to run on the the current visual selection
 au Filetype perl vmap <F2> :Tidy<CR>
+
