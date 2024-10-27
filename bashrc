@@ -116,6 +116,9 @@ alias wgd='wg-quick down wg0'
 # Mutt/Neomutt
 alias mutt='neomutt'
 
+# Indeed, who am I?
+alias whoami='whois $(curl -s ifconfig.co)'
+
 # Dual monitor setup
 alias dualmon="xrandr --auto --output DP-3-1 --primary --mode 2560x1440 --right-of eDP-1 && killall plank && plank&"
 
