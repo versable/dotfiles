@@ -1,0 +1,19 @@
+configuration {
+    modi: "drun,combi";
+    combi-modi: "drun";
+    font: "Sans Regular 10";
+    yoffset: 26;
+}
+
+@theme "Arc-Dark"
+
+* {
+    background: rgba ( 45, 48, 59, 100 % );
+}
+
+window {
+    location: north;
+    anchor: north;
+    width: 100%;
+    border: 0;
+}
